@@ -10,7 +10,7 @@ var logger = require('morgan')
 
 var index = require('./routes/index')
 var user = require('./routes/user')
-mongoose.connect("localhost:27017/photo-uploader")
+mongoose.connect("mongodb://dinesh10c04:3158233@ds125113.mlab.com:25113/photogram")
 require('./config/passport');
 
 var app = express();
