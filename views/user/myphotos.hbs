@@ -1,0 +1,37 @@
+
+<div class="photoContainer">
+    {{#each photos}}
+    <div class="row">
+        {{#each this}}
+            <div class="col s4">
+                <img src="{{this.photo_url}}" class="postimage materialboxed">
+            </div>
+        {{/ each}}
+    </div>
+    {{/ each}}
+</div>
+
+
+
+
+<style>
+    .photoContainer{
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+        padding-top: 60px;
+        padding-left: 5%;
+    }
+
+    .postimage{
+        display: block;
+        width: 350px;
+        height: 350px;
+        margin-bottom: 30px;
+    }
+</style>
+
+
+
+
+

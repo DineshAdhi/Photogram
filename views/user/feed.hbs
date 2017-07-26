@@ -1,0 +1,145 @@
+  <!-- Modal Trigger -->
+  
+  {{# if uploadSuccessMessage}}
+      <div class="" role="alert">Image uploaded successfully </div>
+  {{/ if}}
+
+
+<div class="container right">
+  {{#each posts}}
+    <div class="row">
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-image">
+              <img src="{{this.photo_url}}" class="materialboxed"> 
+            </div>
+            <div class="card-content">
+              <p class="title">{{this.uploadedBy}}</p>
+              <p> {{this.posttext}} </p>
+            </div>
+          </div>
+        </div>
+    </div>
+  {{/ each}}
+</div>
+
+
+
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red modal-trigger" href="#modal1">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+
+
+  <div id="modal1" class="modal modal-fixed-footer">
+  <form id= "uploadForm" enctype= "multipart/form-data" action="/user/feed/feedPost"  method="post">
+   
+        <div class="modal-content">
+
+            <img src="" id="uploadImage">
+
+          <div class="row">
+
+            <div class="file-field input-field">
+
+              <div class="waves-effect waves-light btn">
+                <i class="material-icons right">add_a_photo</i>
+                <span>Image</span>
+                <input type ="file" accept='image/*' name="userPhoto" onchange="openFile(event)"/>
+              </div>
+      
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
+                </div>
+            </div>
+
+          </div>
+            
+            <div class="row">
+
+              <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="icon_prefix2" class="materialize-textarea" name="posttext"></textarea>
+                <label for="icon_prefix2">Post</label>
+              </div>
+
+            </div>
+       
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" id="btn" value="Upload Image" name="submit" class="btn right"> Post </button>
+        </div>
+
+    </form> 
+  </div>
+
+  <style>
+
+        .title{
+           font-size: 17px;
+           color: blue;
+           font-family: 'Josefin Sans', sans-serif;
+           margin-bottom: 40px;
+        }
+        .floatButton{
+               position:absolute;
+                transition: .5s ease;
+                top: 50%;
+                left: 50%;
+        }
+
+       .image{
+            max-height: 350px;
+            max-width: 650px;
+            position: center;
+        }
+
+        #uploadImage{
+          max-height:  70%;
+          max-width:  80%;
+          margin: auto;
+          display: block;
+          margin-bottom: 20px;
+        }
+
+        #btn{
+          margin-right: 10px;
+        }
+
+        .container{
+          margin-top: 50px;
+        }
+ 
+  </style>
+
+  <script>
+
+  $(document).ready(function(){
+       $('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .7, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '40%', // Starting top style attribute
+      endingTop: '10%', 
+    }
+  )});
+
+
+
+  var openFile = function(event){
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('uploadImage');
+      output.src = dataURL;
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  </script>

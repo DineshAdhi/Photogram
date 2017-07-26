@@ -1,0 +1,75 @@
+<div class="container z-depth-4">
+
+    <p class="title">Sign Up</p>
+
+      {{# if hasError}}
+
+        {{# if isUserCreation}}
+            {{#each messages}}
+              <p class="success"> {{this}} </p>
+            {{/ each}}
+        {{/if}}
+
+        {{# if isSignUp }}
+            {{#each messages}}
+              <p class="alert"> {{this}} </p>
+            {{/ each}}
+        {{/ if}}
+
+      {{/if}}
+
+     <div class="row">
+    <form class="col s12" action="/signup" method="post">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="Placeholder" id="firstname" name="firstname" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="lastname" type="text" name="lastname" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" name="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" name="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default waves-effect" >Signup</button>
+    </form>
+  </div>
+</div>
+
+<style>
+    div.container{
+        width: 400px;
+        margin: 150 auto;  
+        padding: 30px; 
+        padding-bottom: 10px;
+    }
+    
+    button{
+        margin-left: 230px;
+    }
+
+    .title{
+        font-size: 20px;
+        color:teal;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .alert{
+      color: red;
+    }
+
+    .success{
+      color: green;
+    }
+</style>

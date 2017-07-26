@@ -1,0 +1,80 @@
+<html>
+
+<head>
+  <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
+  
+</head>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo logo">Photo Uploader</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {{# if loginButton}}   <li><a href="/login" class="nav-button">Login</a> </li>  {{/ if}}
+        {{# if signupButton}} <li><a href="/signup" class="nav-button">Signup</a></li> {{/ if}}
+
+
+        {{# if isLoggedin }} 
+            <li><a class='dropdown-button nav-button' href='#' data-activates='dropdown1'> <i class="material-icons left">person</i>My account </a> </li>
+
+  <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+              <li><a href="/user/feed"> <i class="material-icons"> home </i> Home</a></li>
+              <li><a href="/user/profile"><i class="material-icons">account_circle</i>Profile</a></li>
+              <li><a href="/user/myphotos"> <i class="material-icons">monochrome_photos</i>My Photos</a></li>
+            </ul>
+        {{/ if}}
+
+        {{# if signoutButton}} <li> <a href="/signout" class="nav-button"> <i class= "material-icons left">navigate_before</i> Sign out </a> </li> {{/ if}}
+      </ul>
+    </div>
+  </nav>
+
+<body>
+
+    {{# if home }}
+            <div class="z-depth-4">
+                 {{> header}}
+            </div>
+    {{/ if}}
+
+
+    <div>
+        {{{body}}}
+    </div>
+</body>
+</html>
+
+
+
+<style>
+     a.logo{
+      margin-left: 30px;
+      font-size: 25px;
+      font-family: 'Josefin Sans', sans-serif;
+     }
+
+     .nav-wrapper{
+       background-color:  teal;
+     }
+
+</style>
+
+
+<script>
+      $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    }
+  );
+</script>
