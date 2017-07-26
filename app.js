@@ -14,7 +14,7 @@ mongoose.connect("mongodb://dinesh10c04:3158233@ds125113.mlab.com:25113/photogra
 require('./config/passport');
 
 var app = express();
-var port  = 3000 || process.env.PORT;
+var port  = process.env.PORT || 3000;
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
