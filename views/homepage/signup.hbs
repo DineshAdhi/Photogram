@@ -1,6 +1,6 @@
 <div class="container z-depth-4">
 
-    <p class="title">Sign Up</p>
+    <p class="title"><i class="material-icons right">account_box</i>Sign Up</p>
 
       {{# if hasError}}
 
@@ -22,7 +22,7 @@
     <form class="col s12" action="/signup" method="post">
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Placeholder" id="firstname" name="firstname" type="text" class="validate">
+          <input placeholder="Firstname" id="firstname" name="firstname" type="text" class="validate">
           <label for="first_name">First Name</label>
         </div>
         <div class="input-field col s6">
@@ -53,6 +53,7 @@
         margin: 150 auto;  
         padding: 30px; 
         padding-bottom: 10px;
+        background: #ffffff;
     }
     
     button{
@@ -60,7 +61,7 @@
     }
 
     .title{
-        font-size: 20px;
+        font-size: 23px;
         color:teal;
         font-family: 'Josefin Sans', sans-serif;
     }
@@ -71,5 +72,9 @@
 
     .success{
       color: green;
+    }
+
+    .tiny{
+      font: 5px;
     }
 </style>

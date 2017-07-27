@@ -2,7 +2,12 @@
 
 <div class="container z-depth-4">
 
-     <p class="title">Login</p> 
+     <p class="title"><i class="material-icons right">person_pin</i>Login</p> 
+
+      {{# if isUserCreation}}
+              <p class="success"> Account Creation Successful. </p>
+      {{/if}}
+
      {{# if hasError}}
           {{# each messages}}
             <p class="alert"> {{this}}</p>
@@ -36,6 +41,7 @@
         margin: 150 auto;  
         padding: 30px; 
         padding-bottom: 10px;
+        background: #ffffff;
     }
 
     button{
@@ -43,12 +49,18 @@
     }
 
     .title{
-        font-size: 20px;
+        font-size: 23px;
         color: teal;
         font-family: 'Josefin Sans', sans-serif;
     }
 
     .alert{
       color: red;
+    }
+
+    .success{
+      color: #00695C;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 18px;
     }
 </style>

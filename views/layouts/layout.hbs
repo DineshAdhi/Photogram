@@ -10,12 +10,15 @@
   
 </head>
 
+
+  
+  
   <nav>
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo logo">Photo Uploader</a>
+      <a href="/" class="brand-logo logo"><i class="material-icons right">camera</i> Photogram</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        {{# if loginButton}}   <li><a href="/login" class="nav-button">Login</a> </li>  {{/ if}}
-        {{# if signupButton}} <li><a href="/signup" class="nav-button">Signup</a></li> {{/ if}}
+        {{# if loginButton}}   <li><a href="/login" class="nav-button"> <i class="material-icons left">person_pin</i> Login</a> </li>  {{/ if}}
+        {{# if signupButton}} <li><a href="/signup" class="nav-button"> <i class="material-icons left">account_box</i> Signup</a></li> {{/ if}}
 
 
         {{# if isLoggedin }} 
@@ -78,3 +81,10 @@
     }
   );
 </script>
+
+
+<style> 
+  body{
+    background: #EEEEEE;
+  }
+</style>

@@ -17,22 +17,27 @@ router.get('/', function(req, res){
 router.get('/login', function(req, res){
     var messages = req.flash('error')
     console.log(messages);
-    res.render("homepage/login", {messages : messages , hasError: messages.length > 0, home : false, 
-        loginButton: false, signupButton: true, signoutButton: false});
+
+    var userCreation = req.session.passport
+
+    if(userCreation != undefined){
+        console.log("User Creation Toggle")
+        res.render("homepage/login", {messages : messages , hasError: messages.length > 0, home : false, 
+            loginButton: false, signupButton: true, signoutButton: false, isUserCreation : 1});
+    }
+    else{
+        res.render("homepage/login", {messages : messages , hasError: messages.length > 0, home : false, 
+            loginButton: false, signupButton: true, signoutButton: false});
+    }
 })
 
 router.get('/signup', function(req, res){
     var messages = req.flash('error')
     var userCreation = req.session.passport
-    if(userCreation != undefined){
-        res.render("homepage/signup", {messages : ["Account Successfully created"] , hasError: 1, isUserCreation : 1 ,home: false, 
-        loginButton: true, signupButton: false, signoutButton: false});
-    }
-    else
-    {
+
         res.render("homepage/signup", {messages : messages , hasError: messages.length > 0, isSignUp: 1 ,home: false, 
         loginButton: true, signupButton: false, signoutButton: false});
-    }
+
 })
 
 
@@ -43,7 +48,7 @@ router.get('/signout', function(req, res){
 })
 
 router.post('/signup', passport.authenticate('local.signup', {
-    successRedirect : '/signup',
+    successRedirect : '/login',
     failureRedirect : '/signup',
     successFlash : 'User created Successfully',
     failureFlash : true

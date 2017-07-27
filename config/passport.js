@@ -28,7 +28,7 @@ passport.use('local.signup', new LocalStrategy({
         if(err)
             return done(err)
         if(user)
-            return done(null, false, {message : "The Email already exists"});
+            return done(null, false, {message : "User with the email already exists"});
 
 
 
@@ -61,7 +61,7 @@ passport.use('local.signin', new LocalStrategy({
         if(err)
             return done(err)
         if(!user)
-            return done(null, false, {message: "User does not exist"});
+            return done(null, false, {message: "Incorrect Email"});
         if(!user.validPassword(password))
             return done(null, false, {message : "Your password is incorrect"});
 

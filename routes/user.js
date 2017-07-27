@@ -81,7 +81,7 @@ router.post('/feed/feedPost', function(req, res){
         }
         
         var newpost =  posts();
-        newpost.photo_url = 'http://localhost:3000/image/'+fileName;
+        // newpost.photo_url = 'http://localhost:3000/image/'+fileName;
         newpost.photo_url = 'https://supergram.herokuapp.com/image/'+fileName;
         newpost.uploadedBy = userName;
         newpost.uploadedBy_Id = userId;
