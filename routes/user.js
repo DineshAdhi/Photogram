@@ -77,7 +77,8 @@ router.post('/feed/feedPost', function(req, res){
     upload(req, res, function(err){
         if(err){
             // console.log(err);
-            return res.end('Error Uploading file');
+            console.log(err);
+            return res.end(err);
         }
         
         var newpost =  posts();
