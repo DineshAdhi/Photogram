@@ -4,21 +4,35 @@ var multer = require('multer');
 var router = express.Router();
 var posts = require('../models/posts.js')
 var user = require('../models/users')
+var gcs = require('@google-cloud/storage');
+var format = require('util').format;
 var userId;
 var userName;
 var fileName;
 
-var storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, __dirname+'/..'+'/uploads/');
-    }, filename: function(req, file, cb){
+const storage = gcs({
+    keyFilename : __dirname + '/../practise-key.json'
+})
 
-        fileName = file.fieldname + '-' + Date.now() + '.jpg';
-        cb(null, fileName);
-    }
-});
+const bucket = storage.bucket('demo-for-practise')
 
-var upload = multer({storage : storage}).single('userPhoto');
+var createNewPost = function(url, postText){
+    var newpost = posts();
+    newpost.photo_url =  url;
+    newpost.uploadedBy = userName;
+    newpost.uploadedBy_Id = userId;
+    newpost.date = Date.now();
+    newpost.posttext = postText;
+
+    newpost.save((err, docs) =>{
+        if(err)
+            throw err;
+        else
+            console.log(docs);
+    })
+}
+
+var upload = multer({storage : multer.memoryStorage()}).single('userPhoto');
 
 router.get('/feed', function(req, res){
 
@@ -98,6 +112,48 @@ router.post('/feed/feedPost', function(req, res){
 
         res.redirect('/user/feed');        
     })
+})
+
+
+router.post('/feed/feedGCS', upload, function(req, res, next){
+    if(!req.file){
+        res.status(400).send("No file uploaded");
+        return;
+    }
+
+  const blob = bucket.file(req.file.originalname);
+  const blobStream = blob.createWriteStream();
+
+  blobStream.on('error', (err) => {
+    next(err);
+  });
+
+  blobStream.on('finish', () => {
+    const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
+    
+        bucket.file(req.file.originalname).getSignedUrl({
+            action : 'read',
+            expires : Date.now()+ Date.now(),
+        }, (err, url) =>{
+            if(err)
+            {
+                console.log(err);
+                res.status(400).send("Error");
+            }
+            else{
+                console.log(url);
+                res.redirect('/user/feed')
+                createNewPost(url, req.body.posttext);
+            }
+        })
+
+});
+
+
+  blobStream.end(req.file.buffer);
+
+
+
 })
 
 module.exports = router
